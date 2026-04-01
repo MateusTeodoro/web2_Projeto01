@@ -14,12 +14,8 @@ public class KnifeController {
     private KnifeService knifeService;
 
     @GetMapping("/knife")
-    public String getMethodName() {
-        return "/knife/index";
-    }
-
     public String index(Model model) {
-        model.addAttribute("productsList", knifeService.getAllKnifes());
-        return "product/index";
+        model.addAttribute("knifeList", knifeService.getAllKnifes());
+        return "knife/index";
     }
 }

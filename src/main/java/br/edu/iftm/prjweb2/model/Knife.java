@@ -21,7 +21,7 @@ public class Knife {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "blade size", nullable = false)
+    @Column(name = "size", nullable = false)
     private Float size;
 
     @Column(name = "year", nullable = false)
