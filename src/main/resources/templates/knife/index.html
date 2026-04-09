@@ -11,7 +11,7 @@
 
 <body>
     <div class="container pt-5">
-      <a th:href="@{/knife/create}">Cadastrar Faca</a>
+        <a th:href="@{/knife/create}">Cadastrar Faca</a>
         <h1>Listagem de Facas</h1>
         <table class="table table-striped">
             <thead>
@@ -20,6 +20,7 @@
                     <th scope="col">Descrição</th>
                     <th scope="col">Tamanho da Lâmina</th>
                     <th scope="col">Ano</th>
+                    <th scope="col">Excluir</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,6 +29,9 @@
                     <td scope="row" th:text="${knife.description}"></td>
                     <td scope="row" th:text="${knife.size}"></td>
                     <td scope="row" th:text="${knife.year}"></td>
+                    <td>
+                        <a th:href="@{/knife/delete/{id}(id=${knife.id})}">Deletar</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
