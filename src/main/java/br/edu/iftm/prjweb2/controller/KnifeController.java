@@ -40,4 +40,11 @@ public class KnifeController {
         this.knifeService.deleteKnifeById(id);
         return "redirect:/knife";
     }
+
+    @GetMapping("/knife/edit/{id}")
+    public String edit(@PathVariable Long id, Model model) {
+        Knife knife = knifeService.getKnifeById(id);
+        model.addAttribute("knife", knife);
+        return "knife/edit";
+    }
 }

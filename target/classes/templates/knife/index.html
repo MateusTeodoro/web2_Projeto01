@@ -21,6 +21,7 @@
                     <th scope="col">Tamanho da Lâmina</th>
                     <th scope="col">Ano</th>
                     <th scope="col">Excluir</th>
+                    <th scope="col">Editar</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +32,9 @@
                     <td scope="row" th:text="${knife.year}"></td>
                     <td>
                         <a th:href="@{/knife/delete/{id}(id=${knife.id})}">Deletar</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/knife/edit/{id}(id=${knife.id})}">Editar</a>
                     </td>
                 </tr>
             </tbody>
