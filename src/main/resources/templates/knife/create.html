@@ -16,32 +16,32 @@
             <div class="form-group row">
                 <label for="name" class="col-sm-2 col-form-label">Nome</label>
                 <div class="col-sm-10">
-                    <input type="text" th:field="*{name}" class="form-control" id="name" name="name"
-                        placeholder="Digite o nome da faca">
+                    <input type="text" th:field="*{name}" class="form-control" id="name" name="name" placeholder="Digite o nome da faca">
+                    <p th:if="${#fields.hasErrors('name')}" th:errorclass="text-danger" th:errors="*{name}" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="description">Descrição:</label>
                 <div class="col-sm-10">
-                    <textarea id="description" th:field="*{description}" class="form-control" name="description"
-                        rows="4" cols="50"></textarea>
+                    <textarea id="description" th:field="*{description}" class="form-control" name="description" rows="4" cols="50"></textarea>
+                    <p th:if="${#fields.hasErrors('description')}" th:errorclass="text-danger" th:errors="*{description}" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="size">Tamanho da lâmina:</label>
                 <div class="col-sm-10">
-                    <input type="number" th:field="*{size}" class="form-control" id="size" name="size"
-                        placeholder="Digite o tamanho da lâmina:">
+                    <input type="number" th:field="*{size}" class="form-control" id="size" name="size" placeholder="Digite o tamanho da lâmina:">
+                     <p th:if="${#fields.hasErrors('size')}" th:errorclass="text-danger" th:errors="*{size}" />
                 </div>
             </div>
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="year">Ano:</label>
                 <div class="col-sm-10">
-                    <input type="number" th:field="*{year}" class="form-control" id="year" name="year" step="0.01"
-                        placeholder="Digite o ano de fabricação:">
+                    <input type="number" th:field="*{year}" class="form-control" id="year" name="year" step="0.01" placeholder="Digite o ano de fabricação:">
+                    <p th:if="${#fields.hasErrors('year')}" th:errorclass="text-danger" th:errors="*{year}" />
                 </div>
             </div>
-            <button type="submit" class="btn btn-info col-2">Cadastrar Faca</button>
+            <button type="submit" class="btn btn-info">Cadastrar Faca</button>
         </form>
     </div>
 </body>

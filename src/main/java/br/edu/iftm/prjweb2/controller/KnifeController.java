@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.validation.BindingResult;
 
 import br.edu.iftm.prjweb2.model.Knife;
 import br.edu.iftm.prjweb2.service.KnifeService;
+import jakarta.validation.Valid;
 
 @Controller
 public class KnifeController {
@@ -30,7 +32,13 @@ public class KnifeController {
     }
 
     @PostMapping("/knife/save")
-    public String postMethodName(@ModelAttribute("knife") Knife knife) {
+    public String save(@ModelAttribute @Valid Knife knife, BindingResult result, Model model) {
+
+        if (result.hasErrors()) {
+            model.addAttribute("knife", knife);
+            return "knife/create";
+        }
+
         knifeService.saveKnife(knife);
         return "redirect:/knife";
     }
