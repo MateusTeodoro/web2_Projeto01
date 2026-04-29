@@ -29,9 +29,10 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(requests -> requests
                 .requestMatchers("/home", "/register", "/saveUser").permitAll()
+                .requestMatchers("/knife/*").hasAuthority("Admin")
                 .anyRequest().authenticated())
                 .formLogin(login -> login
-                        .defaultSuccessUrl("/product", true))
+                        .defaultSuccessUrl("/", true))
                 .logout(logout -> logout
                         .logoutRequestMatcher(new AntPathRequestMatcher("/logout")))
                 .exceptionHandling(handling -> handling
