@@ -33,7 +33,7 @@ public class Knife {
     private Float size;
 
     @NotNull(message= "Ano é um campo obrigatório!")
-    @Column(name = "year", nullable = false)
+    @Column(name = "fabrication_year", nullable = false)
     private Integer year;
 
     public Long getId() {
