@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.core.annotation.Order;
 
 @EnableWebSecurity
 @EnableMethodSecurity(prePostEnabled = true)
@@ -24,24 +25,47 @@ public class SecurityConfig {
     @Autowired
     private BCryptPasswordEncoder encoder;
 
+    // @Order(1) garante que esta cadeia seja verificada primeiro.
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-
-        http.authorizeHttpRequests(requests -> requests
-                .requestMatchers("/home", "/register", "/saveUser").permitAll()
-                .requestMatchers("/knife").authenticated()
-                .requestMatchers("/knife/**").hasAuthority("Admin")
-                .anyRequest().authenticated())
-                .formLogin(login -> login
-                        .defaultSuccessUrl("/", true))
-                .logout(logout -> logout
-                        .logoutUrl("/logout"))
-                .exceptionHandling(handling -> handling
-                        .accessDeniedPage("/accessDenied"))
-                .authenticationProvider(authenticationProvider(uds, encoder));
+    @Order(1)
+    public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
+        http
+            .securityMatcher("/api/**")
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/api/public/**").permitAll()
+                .anyRequest().authenticated()
+            )
+            .csrf(csrf -> csrf.disable()) 
+            .httpBasic(basic -> {})
+            .authenticationProvider(authenticationProvider(uds, encoder));
 
         return http.build();
+    }
 
+    // @Order(2) faz esta ser a cadeia "padrão" após a da API.
+    @Bean
+    @Order(2)
+    public SecurityFilterChain webFilterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(requests -> requests
+                .requestMatchers("/home", "/register", "/saveUser", "/error", "/swagger-ui/**", "/v3/api-docs*/**").permitAll()
+                .requestMatchers("/knife").authenticated()
+                .requestMatchers("/knife/**").hasAuthority("Admin")
+                .anyRequest().authenticated() // Protege todas as outras páginas web
+            )
+            .formLogin(login -> login // Configura o login por formulário
+                .defaultSuccessUrl("/", true)
+            )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+            )
+            .exceptionHandling(handling -> handling
+                .accessDeniedPage("/accessDenied")
+            )
+
+            .authenticationProvider(authenticationProvider(uds, encoder));
+
+        return http.build();
     }
 
     @Bean
