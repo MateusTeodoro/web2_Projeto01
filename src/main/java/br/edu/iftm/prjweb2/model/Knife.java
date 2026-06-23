@@ -42,6 +42,10 @@ public class Knife {
     @JoinColumn(name = "categoria_id", nullable = false)
     private Categoria categoria;
 
+    @ManyToOne
+    @JoinColumn(name = "fabricante_id", nullable = false)
+    private Fabricante fabricante;
+
     public Long getId() {
         return id;
     }
