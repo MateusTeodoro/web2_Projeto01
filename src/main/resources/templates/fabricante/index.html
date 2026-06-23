@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:replace="~{/../fragments/head :: head('Listar Fabricante')}"></th:block>
+
+<body>
+    <th:block th:replace="~{/../fragments/head :: header}"></th:block>
+    <div class="container pt-5">
+        <h1>Listagem de Fabricantes</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Origem</th>
+                    <th scope="col">Ano de Fundação</th>
+                    <th scope="col" sec:authorize="hasAuthority('Admin')">Excluir</th>
+                    <th scope="col" sec:authorize="hasAuthority('Admin')">Editar</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="fabricante : ${fabricantes}">
+                    <td scope="row" th:text="${fabricante.name}"></td>
+                    <td scope="row" th:text="${fabricante.origem}"></td>
+                    <td scope="row" th:text="${fabricante.anoFundacao}"></td>
+                    <td>
+                        <a th:href="@{/fabricante/delete/{id}(id=${fabricante.id})}" sec:authorize="hasAuthority('Admin')">Deletar</a>
+                    </td>
+                    <td>
+                        <a th:href="@{/fabricante/edit/{id}(id=${fabricante.id})}" sec:authorize="hasAuthority('Admin')">Editar</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="row">
+        <a th:href="@{/fabricante/create}">
+          <button sec:authorize="hasAuthority('Admin')" class="btn btn-primary">Cadastrar Fabricante</button>
+        </a>
+      </div>
+    </div>
+    <th:block th:replace="~{/../fragments/footer :: footer}"></th:block>
+</body>
+
+</html>
