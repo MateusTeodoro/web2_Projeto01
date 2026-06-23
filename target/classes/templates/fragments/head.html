@@ -50,6 +50,18 @@
                             th:href="@{/categoria/create}">Cadastrar</a>
                     </div>
                 </li>
+
+                <li class="nav-item dropdown active">
+                    <a class="nav-link dropdown-toggle" th:href="@{/fabricante}" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Fabricantes
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" th:href="@{/fabricante}">Listar</a>
+                        <a sec:authorize="hasAuthority('Admin')" class="dropdown-item"
+                            th:href="@{/fabricante/create}">Cadastrar</a>
+                    </div>
+                </li>
             </ul>
             <form class="form-inline my-2 my-lg-0" action="/logout" method="post">
                 <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
