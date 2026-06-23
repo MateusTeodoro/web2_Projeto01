@@ -12,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import br.edu.iftm.prjweb2.model.Knife;
 import br.edu.iftm.prjweb2.service.CategoriaService;
 import br.edu.iftm.prjweb2.service.KnifeService;
+import br.edu.iftm.prjweb2.service.FabricanteService;
+
 import jakarta.validation.Valid;
 
 @Controller
@@ -20,10 +22,12 @@ public class KnifeController {
     @Autowired
     private KnifeService knifeService;
     private CategoriaService categoriaService;
+    private FabricanteService fabricanteService;
 
-    public KnifeController(KnifeService knifeService, CategoriaService categoriaService) {
+    public KnifeController(KnifeService knifeService, CategoriaService categoriaService, FabricanteService fabricanteService) {
         this.knifeService = knifeService;
         this.categoriaService = categoriaService;
+        this.fabricanteService = fabricanteService;
     }
     
     @GetMapping("/knife")
@@ -36,6 +40,7 @@ public class KnifeController {
     public String create(Model model) {
         model.addAttribute("knife", new Knife());
         model.addAttribute("listaCategorias", categoriaService.getAllCategorias());
+        model.addAttribute("listaFabricantes", fabricanteService.getAllFabricantes());
         return "knife/create";
     }
 
@@ -61,6 +66,8 @@ public class KnifeController {
     public String edit(@PathVariable Long id, Model model) {
         Knife knife = knifeService.getKnifeById(id);
         model.addAttribute("knife", knife);
+        model.addAttribute("listaCategorias", categoriaService.getAllCategorias());
+        model.addAttribute("listaFabricantes", fabricanteService.getAllFabricantes());
         return "knife/edit";
     }
 }

@@ -93,4 +93,12 @@ public class Knife {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
+
+    public Fabricante getFabricante() {
+        return fabricante;
+    }
+
+    public void setFabricante(Fabricante fabricante) {
+        this.fabricante = fabricante;
+    }
 }

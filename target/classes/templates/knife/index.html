@@ -15,6 +15,7 @@
                     <th scope="col">Tamanho da Lâmina</th>
                     <th scope="col">Ano</th>
                     <th scope="col">Categoria</th>
+                    <th scope="col">Fabricante</th>
                     <th scope="col">Excluir</th>
                     <th scope="col">Editar</th>
                 </tr>
@@ -25,7 +26,8 @@
                     <td scope="row" th:text="${knife.description}"></td>
                     <td scope="row" th:text="${knife.size}"></td>
                     <td scope="row" th:text="${knife.year}"></td>
-                    <td scope="row" th:text="${knife.categoria?.name}"></td>
+                    <td scope="row" th:text="${knife.categoria.name}"></td>
+                    <td scope="row" th:text="${knife.fabricante.name}"></td>
                     <td>
                         <a th:href="@{/knife/delete/{id}(id=${knife.id})}">Deletar</a>
                     </td>
