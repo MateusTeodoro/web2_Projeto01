@@ -1,6 +1,7 @@
 package br.edu.iftm.prjweb2.service;
 
 import java.util.List;
+
 import br.edu.iftm.prjweb2.model.Categoria;
 
 public interface CategoriaService {
