@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.validation.BindingResult;
 
 import br.edu.iftm.prjweb2.model.Knife;
+import br.edu.iftm.prjweb2.service.CategoriaService;
 import br.edu.iftm.prjweb2.service.KnifeService;
 import jakarta.validation.Valid;
 
@@ -18,7 +19,13 @@ public class KnifeController {
 
     @Autowired
     private KnifeService knifeService;
+    private CategoriaService categoriaService;
 
+    public KnifeController(KnifeService knifeService, CategoriaService categoriaService) {
+        this.knifeService = knifeService;
+        this.categoriaService = categoriaService;
+    }
+    
     @GetMapping("/knife")
     public String index(Model model) {
         model.addAttribute("knifeList", knifeService.getAllKnifes());
@@ -28,6 +35,7 @@ public class KnifeController {
     @GetMapping("/knife/create")
     public String create(Model model) {
         model.addAttribute("knife", new Knife());
+        model.addAttribute("listaCategorias", categoriaService.getAllCategorias());
         return "knife/create";
     }
 
