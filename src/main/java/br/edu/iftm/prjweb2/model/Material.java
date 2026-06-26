@@ -30,4 +30,36 @@ public class Material {
 
     @ManyToMany(mappedBy = "materiais")
     private List<Knife> knives = new ArrayList<>(); //Iniciando a lista para evitar erro de NullPointer
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTipoUso() {
+        return tipoUso;
+    }
+
+    public void setTipoUso(String tipoUso) {
+        this.tipoUso = tipoUso;
+    }
+
+    public List<Knife> getKnives() {
+        return knives;
+    }
+
+    public void setKnives(List<Knife> knives) {
+        this.knives = knives;
+    }
 }
