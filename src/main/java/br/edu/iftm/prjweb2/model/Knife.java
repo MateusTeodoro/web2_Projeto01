@@ -107,4 +107,12 @@ public class Knife {
     public void setFabricante(Fabricante fabricante) {
         this.fabricante = fabricante;
     }
+
+    public List<Material> getMateriais() {
+        return materiais;
+    }
+
+    public void setMateriais(List<Material> materiais) {
+        this.materiais = materiais;
+    }
 }
