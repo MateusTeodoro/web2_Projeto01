@@ -1,11 +1,14 @@
 package br.edu.iftm.prjweb2.model;
 
+import java.util.List;
+import java.util.ArrayList;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
@@ -45,6 +48,9 @@ public class Knife {
     @ManyToOne
     @JoinColumn(name = "fabricante_id", nullable = false)
     private Fabricante fabricante;
+
+    @ManyToMany
+    private List<Material> materiais = new ArrayList<>(); //Iniciando a lista para evitar erro de NullPointer
 
     public Long getId() {
         return id;
