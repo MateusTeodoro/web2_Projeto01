@@ -18,7 +18,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="origem">Origem:</label>
                 <div class="col-sm-10">
-                    <textarea id="origem" th:field="*{origem}" class="form-control" name="origem" rows="4" cols="50"></textarea>
+                    <textarea id="origem" th:field="*{origem}" class="form-control" name="origem" rows="1" cols="50" placeholder="Digite o país de origem"></textarea>
                     <p th:if="${#fields.hasErrors('origem')}" th:errorclass="text-danger" th:errors="*{origem}" />
                 </div>
             </div>
@@ -26,7 +26,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-form-label" for="anoFundacao">Ano de Fundação:</label>
                 <div class="col-sm-10">
-                    <input type="number" th:field="*{anoFundacao}" class="form-control" id="anoFundacao" name="anoFundacao" placeholder="Digite o ano de fundação:">
+                    <input type="number" th:field="*{anoFundacao}" class="form-control" id="anoFundacao" name="anoFundacao" placeholder="Digite o ano de fundação">
                     <p th:if="${#fields.hasErrors('anoFundacao')}" th:errorclass="text-danger" th:errors="*{anoFundacao}" />
                 </div>
             </div>
