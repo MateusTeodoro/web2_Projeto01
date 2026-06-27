@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import br.edu.iftm.prjweb2.model.Knife;
 import br.edu.iftm.prjweb2.service.CategoriaService;
 import br.edu.iftm.prjweb2.service.KnifeService;
+import br.edu.iftm.prjweb2.service.MaterialService;
 import br.edu.iftm.prjweb2.service.FabricanteService;
 
 import jakarta.validation.Valid;
@@ -23,11 +24,13 @@ public class KnifeController {
     private KnifeService knifeService;
     private CategoriaService categoriaService;
     private FabricanteService fabricanteService;
+    private MaterialService materialService;
 
-    public KnifeController(KnifeService knifeService, CategoriaService categoriaService, FabricanteService fabricanteService) {
+    public KnifeController(KnifeService knifeService, CategoriaService categoriaService, FabricanteService fabricanteService, MaterialService materialService) {
         this.knifeService = knifeService;
         this.categoriaService = categoriaService;
         this.fabricanteService = fabricanteService;
+        this.materialService = materialService;
     }
     
     @GetMapping("/knife")
@@ -41,6 +44,7 @@ public class KnifeController {
         model.addAttribute("knife", new Knife());
         model.addAttribute("listaCategorias", categoriaService.getAllCategorias());
         model.addAttribute("listaFabricantes", fabricanteService.getAllFabricantes());
+        model.addAttribute("listaMateriais", materialService.getAllMaterials());
         return "knife/create";
     }
 
@@ -49,6 +53,9 @@ public class KnifeController {
 
         if (result.hasErrors()) {
             model.addAttribute("knife", knife);
+            model.addAttribute("listaCategorias", categoriaService.getAllCategorias());
+            model.addAttribute("listaFabricantes", fabricanteService.getAllFabricantes());
+            model.addAttribute("listaMateriais", materialService.getAllMaterials());
             return "knife/create";
         }
 
@@ -68,6 +75,7 @@ public class KnifeController {
         model.addAttribute("knife", knife);
         model.addAttribute("listaCategorias", categoriaService.getAllCategorias());
         model.addAttribute("listaFabricantes", fabricanteService.getAllFabricantes());
+        model.addAttribute("listaMateriais", materialService.getAllMaterials());
         return "knife/edit";
     }
 }
