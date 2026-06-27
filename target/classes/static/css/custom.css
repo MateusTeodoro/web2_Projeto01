@@ -12,3 +12,10 @@ body {
     display: flex;
     align-items: center;
 }
+
+.scrollable-checkbox-list {
+    max-height: 150px;
+    background-color: #f8f9fa;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
