@@ -5,7 +5,7 @@
 
 <body>
     <th:block th:replace="~{/../fragments/head :: header}"></th:block>
-    <div class="container pt-5">
+    <div class="container-fluid pt-5 px-5">
         <h1>Listagem de Facas</h1>
         <table class="table table-striped">
             <thead>
@@ -16,6 +16,7 @@
                     <th scope="col">Ano</th>
                     <th scope="col">Categoria</th>
                     <th scope="col">Fabricante</th>
+                    <th scope="col">Materiais</th>
                     <th scope="col" sec:authorize="hasAuthority('Admin')">Excluir</th>
                     <th scope="col" sec:authorize="hasAuthority('Admin')">Editar</th>
                 </tr>
@@ -28,10 +29,16 @@
                     <td scope="row" th:text="${knife.year}"></td>
                     <td scope="row" th:text="${knife.categoria.name}"></td>
                     <td scope="row" th:text="${knife.fabricante.name}"></td>
-                    <td>
+                    <td scope="row">
+                        <span th:each="mat : ${knife.materiais}" > <!-- Faz o loop de materiais -->
+                            <span th:text="${mat.name}"></span> <!-- Imprime o nome de cada material -->
+                            <span th:if="${!matStat.last}">, </span> <!-- Coloca uma vírgula depois de cada material exceto o último -->
+                        </span>
+                    </td>
+                    <td scope="row">
                         <a th:href="@{/knife/delete/{id}(id=${knife.id})}" sec:authorize="hasAuthority('Admin')">Deletar</a>
                     </td>
-                    <td>
+                    <td scope="row">
                         <a th:href="@{/knife/edit/{id}(id=${knife.id})}" sec:authorize="hasAuthority('Admin')">Editar</a>
                     </td>
                 </tr>
