@@ -28,7 +28,10 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import br.edu.iftm.prjweb2.config.TestConfig;
 import br.edu.iftm.prjweb2.controller.KnifeController;
+import br.edu.iftm.prjweb2.model.Categoria;
+import br.edu.iftm.prjweb2.model.Fabricante;
 import br.edu.iftm.prjweb2.model.Knife;
+import br.edu.iftm.prjweb2.model.Material;
 import br.edu.iftm.prjweb2.service.KnifeService;
 
 @WebMvcTest(KnifeController.class)
@@ -47,12 +50,32 @@ public class KnifeControllerTest {
     }
 
     private List<Knife> testCreateKnifeList(){
+        
+        Categoria categoriaA = new Categoria();
+        categoriaA.setId(1L);
+        categoriaA.setDescription("Descricao");
+        categoriaA.setName("Categoria A");
+        
+        Fabricante fabricanteA = new Fabricante();
+        fabricanteA.setId(1L);
+        fabricanteA.setOrigem("Origem");
+        fabricanteA.setName("Fabricante A");
+        fabricanteA.setAnoFundacao(123);
+        
+        Material materialA = new Material();
+        materialA.setId(1L);
+        materialA.setTipoUso("Uso");
+        materialA.setName("Material A");
+
         Knife knifeA = new Knife();
         knifeA.setId(1L);
         knifeA.setDescription("Descricao");
         knifeA.setName("Faca A");
         knifeA.setSize(65.24f);
         knifeA.setYear(121);
+        knifeA.setCategoria(categoriaA);
+        knifeA.setFabricante(fabricanteA);
+        knifeA.getMateriais().add(materialA);
 
         return List.of(knifeA);
     }
@@ -122,11 +145,31 @@ public class KnifeControllerTest {
     @WithMockUser(username = "aluno@iftm.edu.br", authorities = { "Admin" })
     @DisplayName("POST /knife/save - Produto válido é salvo com sucesso")
     void testSaveValidknife() throws Exception {
+        
+        Categoria categoriaA = new Categoria();
+        categoriaA.setId(1L);
+        categoriaA.setDescription("Descricao");
+        categoriaA.setName("Categoria A");
+        
+        Fabricante fabricanteA = new Fabricante();
+        fabricanteA.setId(1L);
+        fabricanteA.setOrigem("Origem");
+        fabricanteA.setName("Fabricante A");
+        fabricanteA.setAnoFundacao(123);
+        
+        Material materialA = new Material();
+        materialA.setId(1L);
+        materialA.setTipoUso("Uso");
+        materialA.setName("Material A");
+        
         Knife knife = new Knife();
         knife.setName("Nova Faca");
         knife.setDescription("Descrição");
         knife.setSize(100f);
         knife.setYear(10);
+        knife.setCategoria(categoriaA);
+        knife.setFabricante(fabricanteA);
+        knife.getMateriais().add(materialA);
 
         mockMvc.perform(post("/knife/save")
                         .with(csrf())
@@ -136,5 +179,4 @@ public class KnifeControllerTest {
 
         verify(knifeService).saveKnife(any(Knife.class));
     }
-
 }
