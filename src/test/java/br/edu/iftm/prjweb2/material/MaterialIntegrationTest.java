@@ -1,4 +1,4 @@
-package br.edu.iftm.prjweb2.fabricante;
+package br.edu.iftm.prjweb2.material;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
@@ -14,8 +14,8 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
-import br.edu.iftm.prjweb2.model.Fabricante;
-import br.edu.iftm.prjweb2.repository.FabricanteRepository;
+import br.edu.iftm.prjweb2.model.Material;
+import br.edu.iftm.prjweb2.repository.MaterialRepository;
 
 import jakarta.transaction.Transactional;
 
@@ -23,32 +23,31 @@ import jakarta.transaction.Transactional;
 @AutoConfigureMockMvc
 @ActiveProfiles("test") // Usa application-test.properties
 @Transactional // Limpa o banco após cada teste
-public class FabricanteIntegrationTest {
+public class MaterialIntegrationTest {
     
     @Autowired
     private MockMvc mockMvc;
 
     @Autowired
-    private FabricanteRepository fabricanteRepository;
+    private MaterialRepository materialRepository;
 
     @Test
     @WithMockUser(authorities = { "Admin" })
-    void testSaveFabricanteIntegration() throws Exception {
+    void testSaveMaterialIntegration() throws Exception {
 
-        Fabricante fabricante = new Fabricante();
-        fabricante.setOrigem("Origem");
-        fabricante.setName("Fabricante A");
-        fabricante.setAnoFundacao(123);
+        Material material = new Material();
+        material.setName("Material A");
+        material.setTipoUso("Uso");
 
-        mockMvc.perform(post("/fabricante/save")
+        mockMvc.perform(post("/material/save")
                 .with(csrf())
-                .flashAttr("fabricante", fabricante))
+                .flashAttr("material", material))
                 .andExpect(status().is3xxRedirection())
-                .andExpect(redirectedUrl("/fabricante"));
+                .andExpect(redirectedUrl("/material"));
 
         // Verifica no banco se foi salvo
-        assertTrue(fabricanteRepository.findAll()
+        assertTrue(materialRepository.findAll()
                 .stream()
-                .anyMatch(f -> "Fabricante A".equals(f.getName())));
+                .anyMatch(f -> "Material A".equals(f.getName())));
     }
 }

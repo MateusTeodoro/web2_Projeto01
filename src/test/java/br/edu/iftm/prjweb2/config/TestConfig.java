@@ -1,6 +1,7 @@
 package br.edu.iftm.prjweb2.config;
 
 import br.edu.iftm.prjweb2.service.KnifeService;
+import br.edu.iftm.prjweb2.service.MaterialService;
 import br.edu.iftm.prjweb2.service.CategoriaService;
 import br.edu.iftm.prjweb2.service.FabricanteService;
 import org.mockito.Mockito;
@@ -11,7 +12,7 @@ import org.springframework.context.annotation.Bean;
 public class TestConfig {
 
     @Bean
-    public KnifeService productService() {
+    public KnifeService knifeService() {
         return Mockito.mock(KnifeService.class);
     }
 
@@ -23,6 +24,11 @@ public class TestConfig {
     @Bean
     public FabricanteService fabricanteService() {
         return Mockito.mock(FabricanteService.class);
+    }
+
+    @Bean
+    public MaterialService materialService() {
+        return Mockito.mock(MaterialService.class);
     }
 
 } 

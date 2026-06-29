@@ -49,6 +49,5 @@ public class CategoriaIntegrationTest {
         assertTrue(categoriaRepository.findAll()
                 .stream()
                 .anyMatch(f -> "Categoria A".equals(f.getName())));
-
     }
 }
