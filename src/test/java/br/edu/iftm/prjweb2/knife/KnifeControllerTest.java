@@ -128,7 +128,7 @@ public class KnifeControllerTest {
     @Test
     @WithMockUser
     @DisplayName("POST /knife/save - Falha na validação e retorna para o formulário")
-    void testSaveknifeValidationError() throws Exception {
+    void testSaveKnifeValidationError() throws Exception {
         Knife knife = new Knife(); // Faca sem nome, o que causará erro de validação
 
         mockMvc.perform(post("/knife/save")
@@ -144,7 +144,7 @@ public class KnifeControllerTest {
     @Test
     @WithMockUser(username = "aluno@iftm.edu.br", authorities = { "Admin" })
     @DisplayName("POST /knife/save - Produto válido é salvo com sucesso")
-    void testSaveValidknife() throws Exception {
+    void testSaveValidKnife() throws Exception {
         
         Categoria categoriaA = new Categoria();
         categoriaA.setId(1L);
